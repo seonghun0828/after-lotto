@@ -1,6 +1,22 @@
+'use client';
+
+import { ITEMS } from './const/item';
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from '@/components/ui/sheet';
+
 const AMOUNT = 1422132976;
 
 const Plan = () => {
+  const handlePutItem = () => {
+    console.log('bottom-sheet');
+  };
+
   return (
     <div className='text-small'>
       <div className='p-8'>
@@ -16,12 +32,33 @@ const Plan = () => {
         </div>
       </div>
 
-      <div className='h-[671px] mt-6 mb-14 bg-gray'>아이템을 추가해주세요!</div>
+      <div className='flex justify-center items-center h-[671px] mt-6 mb-14 bg-gray'>
+        {ITEMS.length ? (
+          <div>아이템 리스트</div>
+        ) : (
+          <div className='text-text-gray'>아이템을 추가해주세요!</div>
+        )}
+      </div>
 
       <div className='text-center mb-10'>
-        <button className='w-[476px] h-[72px] rounded-2xl p-2 bg-gradient-to-r from-main-gradation-start to-main-gradation-end text-black font-bold'>
-          아이템 담기
-        </button>
+        <Sheet>
+          <SheetTrigger
+            className='w-[476px] h-[72px] rounded-2xl p-2 bg-gradient-to-r from-main-gradation-start to-main-gradation-end text-black font-bold'
+            onClick={handlePutItem}
+          >
+            아이템 담기
+          </SheetTrigger>
+
+          <SheetContent side='bottom'>
+            <SheetHeader>
+              <SheetTitle>Are you absolutely sure?</SheetTitle>
+              <SheetDescription>
+                This action cannot be undone. This will permanently delete your account and remove
+                your data from our servers.
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
       </div>
       <div>네비게이션</div>
     </div>
