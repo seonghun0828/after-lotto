@@ -60,6 +60,9 @@ export default {
           '5': 'hsl(var(--chart-5))',
         },
       },
+      fontFamily: {
+        pretendard: ['var(--font-pretendard)'],
+      },
       fontSize: {
         small: '20px',
         medium: '24px',
