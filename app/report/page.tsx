@@ -3,33 +3,56 @@ import computerIcon from '@/public/report/icon/code-computer.svg';
 import Image from 'next/image';
 import ReportChart from '../../components/charts/ReportChart';
 import Link from 'next/link';
+import { Test } from '../../components/charts/Test';
+
+export interface Item {
+  id: number;
+  category: string;
+  icon: string;
+  title: string;
+  price: number;
+}
 
 let num = 0;
-const listItem = [
+const listItem: Item[] = [
   {
     id: num++,
-    category: '개발자',
+    category: 'developer',
     icon: '',
     title: 'Apple 2025 맥북프로 16 (M4)',
     price: 3200000,
   },
   {
     id: num++,
-    category: '개발자',
+    category: 'house',
     icon: '',
     title: 'Apple 2025 맥북프로 16 (M4)',
     price: 400000,
   },
   {
     id: num++,
-    category: '개발자',
+    category: 'car',
     icon: '',
     title: 'Apple 2025 맥북프로 16 (M4)',
     price: 3200000,
   },
   {
     id: num++,
-    category: '개발자',
+    category: 'shopping',
+    icon: '',
+    title: 'Apple 2025 맥북프로 16 (M4)',
+    price: 5000000,
+  },
+  {
+    id: num++,
+    category: 'beauty',
+    icon: '',
+    title: 'Apple 2025 맥북프로 16 (M4)',
+    price: 5000000,
+  },
+  {
+    id: num++,
+    category: 'travel',
     icon: '',
     title: 'Apple 2025 맥북프로 16 (M4)',
     price: 5000000,
@@ -94,7 +117,8 @@ const ReportPage = () => {
       </div>
 
       {/* 차트 */}
-      <ReportChart />
+      <Test />
+      <ReportChart listItem={listItem} />
 
       {/* AI 한줄평 */}
       <div className='flex flex-col gap-[20px] bg-[#383838] px-[40px] py-[24px]'>
