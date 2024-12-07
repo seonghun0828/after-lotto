@@ -63,8 +63,8 @@ const chartData2 = [
 
 const ReportChart = () => {
   return (
-    <div>
-      <div>
+    <div className='mb-[12px] flex bg-[#383838] p-[20px]'>
+      <div className='flex-1'>
         <ChartContainer config={chartConfig} className='min-h-[200px] w-full'>
           <BarChart accessibilityLayer data={chartData}>
             <Bar dataKey='desktop' fill='var(--color-desktop)' radius={4} />
@@ -72,10 +72,10 @@ const ReportChart = () => {
           </BarChart>
         </ChartContainer>
       </div>
-      <div>
+      <div className='w-[50%]'>
         <ChartContainer
           config={chartConfig2}
-          className='mx-auto aspect-square max-h-[250px] [&_.recharts-text]:fill-background'
+          className='[&_.recharts-text]:fill-background mx-auto aspect-square max-h-[250px]'
         >
           <PieChart>
             <ChartTooltip content={<ChartTooltipContent nameKey='visitors' hideLabel />} />

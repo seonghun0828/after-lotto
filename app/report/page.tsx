@@ -2,6 +2,7 @@ import arrowLeftIcon from '@/public/report/icon/chevron-left.svg';
 import computerIcon from '@/public/report/icon/code-computer.svg';
 import Image from 'next/image';
 import ReportChart from '../../components/charts/ReportChart';
+import Link from 'next/link';
 
 let num = 0;
 const listItem = [
@@ -40,21 +41,21 @@ const ReportPage = () => {
   const totalPrice = listItem.reduce((acc, cur) => acc + cur.price, 0);
 
   return (
-    <main className='text-white'>
+    <main className='bg-black pb-[140px] text-white'>
       {/* 헤더? 탑? */}
       <div className='px-[40px] pt-[36px]'>
-        <div className='flex items-center gap-2 mb-[24px]'>
+        <div className='mb-[24px] flex items-center gap-2'>
           <Image src={arrowLeftIcon} alt='뒤로가기 아이콘' />
           <p>뒤로가기</p>
         </div>
-        <div className='text-[32px] font-bold font mb-[24px]'>내 로또1등 소비계획 보고서</div>
+        <div className='font mb-[24px] text-[32px] font-bold'>내 로또1등 소비계획 보고서</div>
       </div>
 
       {/* 아이템 리스트 */}
       <div>
         <ul className='bg-[#383838] px-[40px]'>
           {listItem.map((item, index) => {
-            const itemPrecentage = ((item.price / totalPrice) * 100).toFixed(1);
+            const itemPercentage = ((item.price / totalPrice) * 100).toFixed(1);
 
             return (
               <li
@@ -62,19 +63,19 @@ const ReportPage = () => {
                 className='border-b pb-[24px] pt-[24px] last:border-none'
               >
                 <div className=''>
-                  <p className='inline-flex items-center bg-[#222] rounded-full px-[16px] py-[8px] mb-[8px] gap-[4px] '>
+                  <p className='mb-[8px] inline-flex items-center gap-[4px] rounded-full bg-[#222] px-[16px] py-[8px]'>
                     <Image
                       src={computerIcon}
                       alt={item.title}
-                      className='w-[16px] h-auto text-[]'
+                      className='h-auto w-[16px] text-[]'
                     />
                     <span className='text-[16px]'>{item.category}</span>
                   </p>
-                  <div className='flex items-center text-white gap-4'>
-                    <p className='flex-1 font-bold text-[20px]'>{item.title}</p>
-                    <div className='flex gap-[26px] items-center text-[20px]'>
+                  <div className='flex items-center gap-4 text-white'>
+                    <p className='flex-1 text-[20px] font-bold'>{item.title}</p>
+                    <div className='flex items-center gap-[26px] text-[20px]'>
                       <p>{item.price.toLocaleString()} 원</p>
-                      <p className='min-w-[40px]'>{itemPrecentage}%</p>
+                      <p className='min-w-[40px]'>{itemPercentage}%</p>
                     </div>
                   </div>
                 </div>
@@ -88,12 +89,28 @@ const ReportPage = () => {
       <div className='px-[40px] py-[24px]'>
         <div className='flex items-center justify-end gap-[30px]'>
           <div className='text-[20px]'>총액: {totalPrice.toLocaleString()}원</div>
-          <div className='text-[20px] p-[8px]'>{((totalPrice / lottoPrice) * 100).toFixed(1)}%</div>
+          <div className='p-[8px] text-[20px]'>{((totalPrice / lottoPrice) * 100).toFixed(1)}%</div>
         </div>
       </div>
 
       {/* 차트 */}
       <ReportChart />
+
+      {/* AI 한줄평 */}
+      <div className='flex flex-col gap-[20px] bg-[#383838] px-[40px] py-[24px]'>
+        <div className='text-[24px]'>AI 한줄평</div>
+        <div>좋은 계획입니다 ! </div>
+      </div>
+
+      {/* 공유 */}
+      <div className='flex flex-col gap-[24px] px-[62px] pt-[96px] text-center text-[24px] font-semibold'>
+        <Link href={''} className='rounded-[20px] border-[1px] border-[#FF7C78] px-[8px] py-[24px]'>
+          이미지 저장하기
+        </Link>
+        <Link href={''} className='rounded-[20px] border-[1px] border-[#FF7C78] px-[8px] py-[24px]'>
+          URL 복사하기
+        </Link>
+      </div>
     </main>
   );
 };
