@@ -1,5 +1,5 @@
-import InitialContent from './innitialContent';
 import DrawingContent from './DrawingContent';
+import InitialContent from './InitialContent';
 
 interface LandingContentProps {
   isDrawing: boolean;
