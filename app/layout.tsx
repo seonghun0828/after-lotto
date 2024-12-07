@@ -8,8 +8,8 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang='en'>
-      <body className='w-screen flex justify-center'>
-        <div className='h-screen w-[600px] min-w-[320px] bg-black '>{children}</div>
+      <body className='w-screen flex justify-center text-white'>
+        <div className='h-full min-h-screen w-[600px] min-w-[320px] bg-black '>{children}</div>
       </body>
     </html>
   );

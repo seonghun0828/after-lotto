@@ -18,6 +18,11 @@ export default {
         'main-gradation-start': '#FFAEAC',
         'main-gradation-end': '#FF7C78',
       },
+      fontSize: {
+        small: '20px',
+        medium: '24px',
+        xlarge: '64px',
+      },
     },
   },
   plugins: [],
