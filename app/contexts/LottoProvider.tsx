@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { LottoType } from '../types';
+import { LottoType } from '../landing/types';
 
 interface LottoProviderProps {
   initialData: LottoType;

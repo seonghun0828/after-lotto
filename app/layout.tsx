@@ -1,7 +1,8 @@
 import { Metadata } from 'next';
 import './globals.css';
-import { getLottoData } from './landing/_apis/get-lotto-data';
-import LottoProvider from './landing/contexts/LottoProvider';
+import { getLottoData } from './_apis/get-lotto-data';
+import LottoProvider from './contexts/LottoProvider';
+import { getCurrentLottoRound } from './_utils/get-current-lotto-round';
 
 export const metadata: Metadata = {
   title: 'After Lotto',
@@ -9,7 +10,7 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const data = await getLottoData();
+  const data = await getLottoData(getCurrentLottoRound());
 
   return (
     <html lang='en'>
