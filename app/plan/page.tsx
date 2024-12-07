@@ -14,7 +14,12 @@ import { useState } from 'react';
 
 const AMOUNT = 1422132976;
 
-type TItem = 'CODE_COMPUTER' | 'BUILDING' | 'CAR' | 'SHOPPING' | 'AIRPLANE';
+type TItems = 'CODE_COMPUTER' | 'BUILDING' | 'CAR' | 'SHOPPING' | 'AIRPLANE';
+
+interface IItem {
+  name: string;
+  price: number;
+}
 
 interface ICategory {
   name: string;
@@ -34,11 +39,15 @@ const Plan = () => {
   const [category, setCategory] = useState<ICategory>();
   const [isCategoryClick, setIsCategoryClick] = useState(false);
 
-  const [selectedItems, setSelectedItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState<IItem[]>([]);
 
   const handleCategoryClick = (curCategory: ICategory) => {
     setCategory(curCategory);
     setIsCategoryClick(true);
+  };
+
+  const handleItemClick = (curItem: IItem) => {
+    setSelectedItems((prev) => (prev ? [...prev, curItem] : [curItem]));
   };
 
   return (
@@ -74,10 +83,14 @@ const Plan = () => {
             {isCategoryClick ? (
               <SheetHeader>
                 <SheetTitle className='flex flex-row align-center text-white gap-2'>
-                  {/* TODO: image로 교체 */}
-                  <div className='mr-4 cursor-pointer' onClick={() => setIsCategoryClick(false)}>
-                    {'<'}
-                  </div>{' '}
+                  <Image
+                    className='cursor-pointer'
+                    src={`/images/plan/arrow-left.png`}
+                    width={28}
+                    height={28}
+                    alt='arrow-left'
+                    onClick={() => setIsCategoryClick(false)}
+                  />
                   <Image
                     src={`/images/plan/${category?.value}.png`}
                     width={28}
@@ -89,14 +102,15 @@ const Plan = () => {
 
                 <SheetDescription className='text-white'>
                   <div className='flex flex-col items-center'>
-                    {ITEMS[category?.value.replaceAll('-', '_').toUpperCase() as TItem].map(
-                      (subCategory) => (
+                    {ITEMS[category?.value.replaceAll('-', '_').toUpperCase() as TItems].map(
+                      (item) => (
                         <div
-                          key={subCategory.name}
+                          key={item.name}
                           className='w-full max-w-[520px] h-[92px] flex justify-between items-center border-b-2 border-light-gray text-small cursor-pointer'
+                          onClick={() => handleItemClick(item)}
                         >
-                          <div>{subCategory?.name}</div>
-                          <div>{subCategory?.price.toLocaleString()}원</div>
+                          <div>{item?.name}</div>
+                          <div>{item?.price.toLocaleString()}원</div>
                         </div>
                       ),
                     )}
