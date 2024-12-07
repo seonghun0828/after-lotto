@@ -11,7 +11,7 @@ export default function DrawingContent() {
 
   useEffect(() => {
     setAmnt(firstWinamnt);
-  }, []);
+  }, [firstWinamnt]);
 
   return (
     <>
