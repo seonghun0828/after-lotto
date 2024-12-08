@@ -4,61 +4,25 @@ import computerIcon from '@/public/report/icon/code-computer.svg';
 import html2canvas from 'html2canvas';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useRef } from 'react';
 import ReportChart from '../../components/charts/ReportChart';
 import { useLottoContext } from '../_contexts/LottoProvider';
 import { useItems } from '../_hooks/useItems';
-import { IItem } from '../const/items.const';
-
-let num = 0;
-const listItem: IItem[] = [
-  {
-    id: num++,
-    category: 'developer',
-    name: 'Apple 2025 맥북프로 16 (M4)',
-    price: 32000100,
-  },
-  {
-    id: num++,
-    category: 'real-estate',
-    name: 'Apple 2025 맥북프로 16 (M4)',
-    price: 40000200,
-  },
-  {
-    id: num++,
-    category: 'car',
-    name: 'Apple 2025 맥북프로 16 (M4)',
-    price: 32000020,
-  },
-  {
-    id: num++,
-    category: 'shopping',
-    name: 'Apple 2025 맥북프로 16 (M4)',
-    price: 5000000,
-  },
-  {
-    id: num++,
-    category: 'beauty',
-    name: 'Apple 2025 맥북프로 16 (M4)',
-    price: 50000200,
-  },
-  {
-    id: num++,
-    category: 'travel',
-    name: 'Apple 2025 맥북프로 16 (M4)',
-    price: 5000100,
-  },
-];
 
 const ReportPage = () => {
-  const { lottoData } = useLottoContext();
   const { getItems } = useItems();
+  const { lottoData } = useLottoContext();
   const captureRef = useRef<HTMLDivElement>(null);
-  const lottoPrice = lottoData?.firstAccumamnt ?? 0;
-  const totalPrice = listItem.reduce((acc, cur) => acc + cur.price, 0);
-  const percentage = totalPrice / lottoPrice;
+  const searchParams = useSearchParams();
+  const itemsParam = searchParams.get('items'); 
+  const filteredItems = getItems().filter((item) =>
+    itemsParam?.split(',').includes(item.id.toString())
+  );
 
-  const item = getItems();
+  const lottoPrice = lottoData?.firstAccumamnt ?? 0;
+  const totalPrice = filteredItems.reduce((acc, cur) => acc + cur.price, 0);
+  const percentage = totalPrice / lottoPrice;
 
   const getCategory = (category?: string): string => {
     switch (category) {
@@ -106,7 +70,7 @@ const ReportPage = () => {
     <main className='bg-black pb-[140px] text-white'>
       {/* 헤더 */}
       <div className='px-[40px] pt-[36px]'>
-        <Link href='/plan' className='mb-[24px] flex items-center gap-2'>
+        <Link href={searchParams ? `/plan?${searchParams.toString()}` : '/plan'} className='mb-[24px] flex items-center gap-2'>
           <Image src={arrowLeftIcon} alt='뒤로가기 아이콘' />
           <p>뒤로가기</p>
         </Link>
@@ -116,7 +80,7 @@ const ReportPage = () => {
         <div className='mb-[24px] px-[40px] text-[32px] font-bold'>내 로또1등 소비계획 보고서</div>
         {/* 아이템 리스트 */}
         <div className='bg-[#383838] px-[40px] py-[0px]'>
-          {listItem.map((item, index) => {
+          {filteredItems.map((item, index) => {
             const itemPercentage = Math.max((item.price / lottoPrice) * 100, 0.1).toFixed(1);
 
             return (
@@ -157,7 +121,7 @@ const ReportPage = () => {
         </div>
 
         {/* 차트 */}
-        <ReportChart listItem={listItem} />
+        <ReportChart listItem={filteredItems} />
 
         {/* 한줄평 */}
         <div className='flex flex-col gap-[20px] bg-[#383838] px-[40px] py-[24px]'>
