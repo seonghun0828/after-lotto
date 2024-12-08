@@ -3,7 +3,7 @@ import { getImageName, getKoreanName } from '@/app/_utils/get-category-info';
 import Image from 'next/image';
 
 const AddedItemList = () => {
-  const { getItems } = useItems();
+  const { getItems, removeItem } = useItems();
   const items = getItems();
 
   return (
@@ -30,7 +30,12 @@ const AddedItemList = () => {
 
               <div className='flex items-center gap-4 text-white'>
                 <p className='flex-1 font-bold'>{name}</p>
+
                 <p>{price.toLocaleString()} 원</p>
+
+                <button onClick={() => removeItem({ id, name, category, price })}>
+                  <Image src='/images/plan/delete.png' width={24} height={24} alt='trash icon' />
+                </button>
               </div>
             </li>
           ))}
