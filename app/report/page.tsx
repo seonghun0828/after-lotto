@@ -98,12 +98,12 @@ const ReportPage = () => {
                     {getCategory(item.category)}
                   </span>
                 </div>
-                <div className='flex items-center gap-4 text-white'>
-                  <p className='flex-1 text-[20px] font-bold'>{item.name}</p>
-                  <div className='flex items-center gap-[26px] text-[20px]'>
-                    <p>{item.price.toLocaleString()} 원</p>
+                <div className='flex items-center justify-between gap-4 text-white text-[20px]'>
+                    <div className='flex flex-col gap-[8px]'>
+                        <p className='font-bold'>{item.name}</p>
+                        <p className=''>{item.price.toLocaleString()} 원</p>
+                    </div>
                     <p className='min-w-[40px]'>{itemPercentage}%</p>
-                  </div>
                 </div>
               </div>
             );
