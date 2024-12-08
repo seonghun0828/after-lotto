@@ -57,32 +57,32 @@ const BottomSheet = ({ setSelectedItems }: IBottomSheet) => {
                 <div>{category?.name}</div>
               </SheetTitle>
 
-              <SheetDescription className='text-white'>
-                <div className='flex flex-col items-center'>
+              <SheetDescription className='text-white min-h-[500px] max-h-[50vh] overflow-y-auto custom-scrollbar'>
+                <span className='flex flex-col items-center'>
                   {ITEMS[category?.value.replaceAll('-', '_').toUpperCase() as TItems].map(
                     (item) => (
-                      <div
+                      <span
                         key={item.name}
                         className='w-full max-w-[520px] h-[92px] flex justify-between items-center border-b-2 border-light-gray text-small cursor-pointer'
                         onClick={() => handleItemClick(item)}
                       >
-                        <div>{item?.name}</div>
-                        <div>{item?.price.toLocaleString()}원</div>
-                      </div>
+                        <span>{item?.name}</span>
+                        <span>{item?.price.toLocaleString()}원</span>
+                      </span>
                     ),
                   )}
-                </div>
+                </span>
               </SheetDescription>
             </SheetHeader>
           ) : (
             <SheetHeader>
               <SheetTitle className='text-white text-left'>카테고리</SheetTitle>
-              <SheetDescription className='text-white '>
-                <div className='grid grid-cols-3 gap-8'>
+              <SheetDescription className='text-white'>
+                <span className='grid grid-cols-3 gap-8 justify-items-center'>
                   {CATEGORIES.map((category) => (
-                    <div
+                    <span
                       key={category.name}
-                      className='flex flex-col items-center gap-2 max-w-36 p-4 cursor-pointer'
+                      className='flex flex-col items-center gap-2 w-full max-w-36 p-4 cursor-pointer'
                       onClick={() => handleCategoryClick(category)}
                     >
                       <Image
@@ -91,10 +91,10 @@ const BottomSheet = ({ setSelectedItems }: IBottomSheet) => {
                         height={48}
                         alt='code-computer'
                       />
-                      <div className='text-small'>{category.name}</div>
-                    </div>
+                      <span className='text-small'>{category.name}</span>
+                    </span>
                   ))}
-                </div>
+                </span>
               </SheetDescription>
             </SheetHeader>
           )}
