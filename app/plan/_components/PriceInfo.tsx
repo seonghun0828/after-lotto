@@ -1,4 +1,4 @@
-import { useLottoContext } from '@/app/contexts/LottoProvider';
+import { useLottoContext } from '@/app/_contexts/LottoProvider';
 import { useBudget } from '../_hooks/useBudget';
 
 const PriceInfo = () => {

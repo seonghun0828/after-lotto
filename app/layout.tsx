@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import './globals.css';
 import { getLottoData } from './_apis/get-lotto-data';
-import LottoProvider from './contexts/LottoProvider';
+import LottoProvider from './_contexts/LottoProvider';
 import { getCurrentLottoRound } from './_utils/get-current-lotto-round';
 
 import localFont from 'next/font/local';
