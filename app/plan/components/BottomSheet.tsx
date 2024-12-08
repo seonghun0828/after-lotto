@@ -36,7 +36,7 @@ const BottomSheet = ({ setSelectedItems }: IBottomSheet) => {
           아이템 담기
         </SheetTrigger>
 
-        <SheetContent side='bottom' className='bg-black h-3/5'>
+        <SheetContent side='bottom' className='bg-black h-3/5 max-w-[600px] mx-auto'>
           {isCategoryClick ? (
             <SheetHeader>
               <SheetTitle className='flex flex-row align-center text-white gap-2'>
