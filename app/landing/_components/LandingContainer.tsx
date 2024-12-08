@@ -32,11 +32,12 @@ export default function LandingContainer() {
       <div className='px-[40px] pt-[70px] pb-[60px] h-screen flex flex-col gap-[24px]'>
         <LandingLogo />
         <LandingContent className='flex flex-col gap-[30px]' isDrawing={isDrawing} />
+
         <div
           className={`max-w-[524px] h-[72px] px-[24px]  ${isDrawing && 'invisible'}`}
         >
           <button
-            className=' w-full h-full font-semibold text-[24px] text-[#222222] rounded-[20px] bg-gradient-to-r from-[#FFAEAC] to-[#FF7C78]'
+            className='w-full h-full font-semibold text-[24px] text-[#222222] rounded-[20px] bg-gradient-to-r from-[#FFAEAC] to-[#FF7C78]'
             type='button'
             onClick={handleDraw}
           >

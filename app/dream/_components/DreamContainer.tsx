@@ -28,9 +28,10 @@ export default function DreamContainer() {
             <Spline scene={dream} />
           </Suspense>
         </div>
-        <div className='max-w-[524px] h-[72px] px-[24px]'>
+
+        <div className='max-w-[524px] h-[72px] px-[24px] w-full m-auto'>
           <button
-            className=' w-full h-full font-semibold text-[24px] text-[#222222] rounded-[20px] bg-gradient-to-r from-[#FFAEAC] to-[#FF7C78]'
+            className='w-full h-full font-semibold text-[24px] text-[#222222] rounded-[20px] bg-gradient-to-r from-[#FFAEAC] to-[#FF7C78]'
             type='button'
             onClick={handleClick}
           >
