@@ -1,5 +1,5 @@
 import { useItems } from '@/app/_hooks/useItems';
-import { getImageName, getKoreanName } from '@/app/_utils/get-category-info';
+import { getImagePath, getKoreanName } from '@/app/_utils/get-info-from-category';
 import Image from 'next/image';
 
 const AddedItemList = () => {
@@ -17,7 +17,7 @@ const AddedItemList = () => {
             >
               <div className='flex w-fit gap-1 items-center rounded-full bg-black px-4 py-2 text-white'>
                 <Image
-                  src={getImageName(category)}
+                  src={getImagePath(category)}
                   width={16}
                   height={16}
                   alt={name}
@@ -27,7 +27,6 @@ const AddedItemList = () => {
                   {getKoreanName(category)}
                 </span>
               </div>
-
               <div className='flex items-center gap-4 text-white'>
                 <p className='flex-1 font-bold'>{name}</p>
 

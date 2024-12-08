@@ -24,6 +24,6 @@ export const getKoreanName = (category: Category) => {
   return KOREAN_NAME_MAP[category] ?? '';
 };
 
-export const getImageName = (category: Category) => {
+export const getImagePath = (category: Category) => {
   return `${IMAGE_PATH}/${IMAGE_NAME_MAP[category] ?? ''}`;
 };
