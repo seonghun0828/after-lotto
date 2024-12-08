@@ -1,9 +1,7 @@
 import arrowLeftIcon from '@/public/report/icon/chevron-left.svg';
 import computerIcon from '@/public/report/icon/code-computer.svg';
 import Image from 'next/image';
-import ReportChart from '../../components/charts/ReportChart';
 import Link from 'next/link';
-import { Test } from '../../components/charts/Test';
 
 export interface Item {
   id: number;
@@ -78,7 +76,7 @@ const ReportPage = () => {
       <div>
         <ul className='bg-[#383838] px-[40px]'>
           {listItem.map((item, index) => {
-            const itemPercentage = ((item.price / totalPrice) * 100).toFixed(1);
+            const itemPercentage = Math.max((item.price / lottoPrice) * 100, 0.1).toFixed(1);
 
             return (
               <li
@@ -117,8 +115,7 @@ const ReportPage = () => {
       </div>
 
       {/* 차트 */}
-      <Test />
-      <ReportChart listItem={listItem} />
+      {/* <ReportChart listItem={listItem} /> */}
 
       {/* AI 한줄평 */}
       <div className='flex flex-col gap-[20px] bg-[#383838] px-[40px] py-[24px]'>
