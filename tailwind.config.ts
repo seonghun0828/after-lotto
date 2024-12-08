@@ -64,9 +64,9 @@ export default {
         pretendard: ['var(--font-pretendard)'],
       },
       fontSize: {
-        small: '20px',
-        medium: '24px',
-        xlarge: '64px',
+        small: '1.25rem',
+        medium: '1.5rem',
+        xlarge: '3rem',
       },
       borderRadius: {
         lg: 'var(--radius)',
