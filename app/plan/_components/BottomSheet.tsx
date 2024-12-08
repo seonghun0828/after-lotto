@@ -27,14 +27,13 @@ const PLAN_TO_COMMON_TEMP: Record<string, string> = {
 const BottomSheet = () => {
   const [category, setCategory] = useState<ICategory>(); //대분류 리스트
   const [items, setItems] = useState<IItem[]>([]); //소분류 리스트
-  const [isCategoryClick, setIsCategoryClick] = useState(false);
 
   const { addItem } = useItems();
 
+  const resetCategory = () => setCategory(undefined);
+
   const handleCategoryClick = (curCategory: ICategory) => {
     setCategory(curCategory);
-    setIsCategoryClick(true);
-
     getItemsByCategory(PLAN_TO_COMMON_TEMP[curCategory.value]);
   };
 
@@ -49,13 +48,13 @@ const BottomSheet = () => {
 
   return (
     <div className='text-center'>
-      <Sheet>
+      <Sheet onOpenChange={resetCategory}>
         <SheetTrigger className='w-full max-w-[476px] h-[72px] rounded-2xl p-2 my-8 bg-gradient-to-r from-main-gradation-start to-main-gradation-end text-black font-bold'>
           아이템 담기
         </SheetTrigger>
 
         <SheetContent side='bottom' className='bg-black h-3/5 max-w-[600px] mx-auto'>
-          {isCategoryClick ? (
+          {category ? (
             <SheetHeader>
               <SheetTitle className='flex flex-row align-center text-white gap-2'>
                 <Image
@@ -64,7 +63,7 @@ const BottomSheet = () => {
                   width={28}
                   height={28}
                   alt='arrow-left'
-                  onClick={() => setIsCategoryClick(false)}
+                  onClick={resetCategory}
                 />
                 <Image
                   src={`/images/plan/${category?.value}.png`}
