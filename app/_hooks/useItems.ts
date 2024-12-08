@@ -29,7 +29,8 @@ export const useItems = () => {
     const removedItems = itemIds.filter((id) => id !== item.id);
     params.set('items', removedItems.join(','));
     const newParams = params.get('items');
-    router.push(`${pathname}?items=${newParams}`);
+    // 라우터 푸시할 때 스크롤 유지
+    router.push(`${pathname}?items=${newParams}`, { scroll: false });
 
     // 마지막 아이템 삭제 시 url에서 쿼리 삭제
     if (removedItems.length === 0) {

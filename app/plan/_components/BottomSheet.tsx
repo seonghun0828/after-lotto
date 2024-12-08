@@ -7,26 +7,42 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/app/_components/ui/sheet';
-import { Dispatch, SetStateAction, useState } from 'react';
-import { ICategory, IItem, TItems } from '../_types/plan.types';
-import { ITEMS } from '../_const/item';
+import { useState } from 'react';
+import { ICategory } from '../_types/plan.types';
 import { CATEGORIES } from '../_const/category';
+import { useItems } from '@/app/_hooks/useItems';
+import { IItem, ITEMS } from '@/app/const/items.const';
 
-interface IBottomSheet {
-  setSelectedItems: Dispatch<SetStateAction<IItem[]>>;
-}
+const PLAN_TO_COMMON_TEMP: Record<string, string> = {
+  'code-computer': 'developer',
+  building: 'real-estate',
+  car: 'car',
+  shopping: 'shopping',
+  makeups: 'beauty',
+  airplane: 'travel',
+};
 
-const BottomSheet = ({ setSelectedItems }: IBottomSheet) => {
-  const [category, setCategory] = useState<ICategory>();
+const BottomSheet = () => {
+  const [category, setCategory] = useState<ICategory>(); //대분류 리스트
+  const [items, setItems] = useState<IItem[]>([]); //소분류 리스트
   const [isCategoryClick, setIsCategoryClick] = useState(false);
+
+  const { addItem } = useItems();
 
   const handleCategoryClick = (curCategory: ICategory) => {
     setCategory(curCategory);
     setIsCategoryClick(true);
+
+    getItemsByCategory(PLAN_TO_COMMON_TEMP[curCategory.value]);
   };
 
   const handleItemClick = (curItem: IItem) => {
-    setSelectedItems((prev) => (prev ? [...prev, curItem] : [curItem]));
+    addItem(curItem);
+  };
+
+  const getItemsByCategory = (category: string) => {
+    const items = ITEMS.filter((item) => item.category === category);
+    setItems(items);
   };
 
   return (
@@ -57,32 +73,30 @@ const BottomSheet = ({ setSelectedItems }: IBottomSheet) => {
                 <div>{category?.name}</div>
               </SheetTitle>
 
-              <SheetDescription className='text-white'>
-                <div className='flex flex-col items-center'>
-                  {ITEMS[category?.value.replaceAll('-', '_').toUpperCase() as TItems].map(
-                    (item) => (
-                      <div
-                        key={item.name}
-                        className='w-full max-w-[520px] h-[92px] flex justify-between items-center border-b-2 border-light-gray text-small cursor-pointer'
-                        onClick={() => handleItemClick(item)}
-                      >
-                        <div>{item?.name}</div>
-                        <div>{item?.price.toLocaleString()}원</div>
-                      </div>
-                    ),
-                  )}
-                </div>
+              <SheetDescription className='text-white min-h-[500px] max-h-[50vh] overflow-y-auto custom-scrollbar'>
+                <span className='flex flex-col items-center'>
+                  {items.map((item) => (
+                    <span
+                      key={item.id}
+                      className='w-full max-w-[520px] h-[92px] flex justify-between items-center border-b-2 border-light-gray text-small cursor-pointer'
+                      onClick={() => handleItemClick(item)}
+                    >
+                      <span>{item?.name}</span>
+                      <span>{item?.price.toLocaleString()}원</span>
+                    </span>
+                  ))}
+                </span>
               </SheetDescription>
             </SheetHeader>
           ) : (
             <SheetHeader>
               <SheetTitle className='text-white text-left'>카테고리</SheetTitle>
-              <SheetDescription className='text-white '>
-                <div className='grid grid-cols-3 gap-8'>
+              <SheetDescription className='text-white'>
+                <span className='grid grid-cols-3 gap-8 justify-items-center'>
                   {CATEGORIES.map((category) => (
-                    <div
+                    <span
                       key={category.name}
-                      className='flex flex-col items-center gap-2 max-w-36 p-4 cursor-pointer'
+                      className='flex flex-col items-center gap-2 w-full max-w-36 p-4 cursor-pointer'
                       onClick={() => handleCategoryClick(category)}
                     >
                       <Image
@@ -91,10 +105,10 @@ const BottomSheet = ({ setSelectedItems }: IBottomSheet) => {
                         height={48}
                         alt='code-computer'
                       />
-                      <div className='text-small'>{category.name}</div>
-                    </div>
+                      <span className='text-small'>{category.name}</span>
+                    </span>
                   ))}
-                </div>
+                </span>
               </SheetDescription>
             </SheetHeader>
           )}
