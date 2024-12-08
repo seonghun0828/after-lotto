@@ -4,25 +4,28 @@ import PriceInfo from './_components/PriceInfo';
 import BottomSheet from './_components/BottomSheet';
 import AddedItemList from './_components/AddedItemList';
 import { IItem } from './_types/plan.types';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
+import ShareButton from './_components/ShareButton';
 
 const Plan = () => {
-  const [selectedItems, setSelectedItems] = useState<IItem[]>([]);
+  const [, setSelectedItems] = useState<IItem[]>([]);
 
   return (
-    <div className='font-pretendard text-small'>
-      <div className='p-8'>
-        <div className='text-medium text-right'>공유하기</div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <div className='font-pretendard text-small'>
+        <div className='p-8'>
+          <ShareButton />
 
-        <PriceInfo />
+          <PriceInfo />
+        </div>
+
+        <AddedItemList />
+
+        <BottomSheet />
+
+        <div>네비게이션</div>
       </div>
-
-      <AddedItemList selectedItems={selectedItems} />
-
-      <BottomSheet />
-
-      <div>네비게이션</div>
-    </div>
+    </Suspense>
   );
 };
 
