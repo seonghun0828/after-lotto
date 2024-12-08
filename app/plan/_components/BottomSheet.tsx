@@ -6,11 +6,11 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from '@/components/ui/sheet';
+} from '@/app/_components/ui/sheet';
 import { Dispatch, SetStateAction, useState } from 'react';
-import { ICategory, IItem, TItems } from '../types/plan.types';
-import { ITEMS } from '../const/item';
-import { CATEGORIES } from '../const/category';
+import { ICategory, IItem, TItems } from '../_types/plan.types';
+import { ITEMS } from '../_const/item';
+import { CATEGORIES } from '../_const/category';
 
 interface IBottomSheet {
   setSelectedItems: Dispatch<SetStateAction<IItem[]>>;
@@ -36,7 +36,7 @@ const BottomSheet = ({ setSelectedItems }: IBottomSheet) => {
           아이템 담기
         </SheetTrigger>
 
-        <SheetContent side='bottom' className='bg-black h-3/5'>
+        <SheetContent side='bottom' className='bg-black h-3/5 max-w-[600px] mx-auto'>
           {isCategoryClick ? (
             <SheetHeader>
               <SheetTitle className='flex flex-row align-center text-white gap-2'>

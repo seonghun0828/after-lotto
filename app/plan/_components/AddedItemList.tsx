@@ -1,4 +1,4 @@
-import { IItem } from '../types/plan.types';
+import { IItem } from '../_types/plan.types';
 
 interface IAddedItemList {
   selectedItems: IItem[];

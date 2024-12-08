@@ -1,9 +1,9 @@
 'use client';
 
-import PriceInfo from './components/PriceInfo';
-import BottomSheet from './components/BottomSheet';
-import AddedItemList from './components/AddedItemList';
-import { IItem } from './types/plan.types';
+import PriceInfo from './_components/PriceInfo';
+import BottomSheet from './_components/BottomSheet';
+import AddedItemList from './_components/AddedItemList';
+import { IItem } from './_types/plan.types';
 import { useState } from 'react';
 
 const Plan = () => {
