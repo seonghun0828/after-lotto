@@ -6,11 +6,12 @@ import {
   ChartTooltipContent,
 } from '@/components/ui/chart';
 import { Bar, BarChart, CartesianGrid, LabelList, Pie, PieChart, XAxis } from 'recharts';
-import { Item } from '../../app/report/page';
+import { IItem } from '../../app/const/items.const';
 
 interface ReportChartProps {
-  listItem: Item[]; //Pick<Item, 'category' | 'price'>[];
+  listItem: IItem[];
 }
+
 const chartConfig = {
   price: {
     label: '가격',
@@ -20,8 +21,8 @@ const chartConfig = {
     label: 'develop',
     color: 'hsl(var(--chart-1))',
   },
-  house: {
-    label: 'house',
+  realestate: {
+    label: 'real-estate',
     color: 'hsl(var(--chart-2))',
   },
   car: {
@@ -46,13 +47,13 @@ const ReportChart = ({ listItem }: ReportChartProps) => {
   const chartData = Object.entries(
     listItem.reduce(
       (acc, item) => {
-        acc[item.category] = (acc[item.category] || 0) + item.price;
+        acc[item.category.split('-').join('')] = (acc[item.category] || 0) + item.price;
         return acc;
       },
       {} as { [key: string]: number },
     ),
   ).map(([category, price]) => ({
-    category: category,
+    category: category.split('-').join(''),
     price: price,
     fill: chartConfig[category as keyof typeof chartConfig]?.color,
   }));
@@ -70,7 +71,7 @@ const ReportChart = ({ listItem }: ReportChartProps) => {
               axisLine={false}
               tickFormatter={(value) => {
                 if (value === 'developer') return '개발';
-                if (value === 'house') return '부동산';
+                if (value === 'realestate') return '부동산';
                 if (value === 'car') return '자동차';
                 if (value === 'shopping') return '쇼핑';
                 if (value === 'beauty') return '뷰티';

@@ -1,131 +1,150 @@
 'use client';
 import arrowLeftIcon from '@/public/report/icon/chevron-left.svg';
 import computerIcon from '@/public/report/icon/code-computer.svg';
+import html2canvas from 'html2canvas';
 import Image from 'next/image';
 import Link from 'next/link';
-import ReportChart from '../../components/charts/ReportChart';
 import { useRef } from 'react';
-import html2canvas from 'html2canvas';
-
-export interface Item {
-  id: number;
-  category: string;
-  icon: string;
-  title: string;
-  price: number;
-}
+import ReportChart from '../../components/charts/ReportChart';
+import { useLottoContext } from '../_contexts/LottoProvider';
+import { useItems } from '../_hooks/useItems';
+import { IItem } from '../const/items.const';
 
 let num = 0;
-const listItem: Item[] = [
+const listItem: IItem[] = [
   {
     id: num++,
     category: 'developer',
-    icon: '',
-    title: 'Apple 2025 맥북프로 16 (M4)',
-    price: 3200000,
+    name: 'Apple 2025 맥북프로 16 (M4)',
+    price: 32000100,
   },
   {
     id: num++,
-    category: 'house',
-    icon: '',
-    title: 'Apple 2025 맥북프로 16 (M4)',
-    price: 4000000,
+    category: 'real-estate',
+    name: 'Apple 2025 맥북프로 16 (M4)',
+    price: 40000200,
   },
   {
     id: num++,
     category: 'car',
-    icon: '',
-    title: 'Apple 2025 맥북프로 16 (M4)',
-    price: 3200000,
+    name: 'Apple 2025 맥북프로 16 (M4)',
+    price: 32000020,
   },
   {
     id: num++,
     category: 'shopping',
-    icon: '',
-    title: 'Apple 2025 맥북프로 16 (M4)',
+    name: 'Apple 2025 맥북프로 16 (M4)',
     price: 5000000,
   },
   {
     id: num++,
     category: 'beauty',
-    icon: '',
-    title: 'Apple 2025 맥북프로 16 (M4)',
-    price: 5000000,
+    name: 'Apple 2025 맥북프로 16 (M4)',
+    price: 50000200,
   },
   {
     id: num++,
     category: 'travel',
-    icon: '',
-    title: 'Apple 2025 맥북프로 16 (M4)',
-    price: 5000000,
+    name: 'Apple 2025 맥북프로 16 (M4)',
+    price: 5000100,
   },
 ];
 
 const ReportPage = () => {
-  const lottoPrice = 1433132976; // 14억
-  const totalPrice = listItem.reduce((acc, cur) => acc + cur.price, 0);
+  const { lottoData } = useLottoContext();
+  const { getItems } = useItems();
   const captureRef = useRef<HTMLDivElement>(null);
+  const lottoPrice = lottoData?.firstAccumamnt ?? 0;
+  const totalPrice = listItem.reduce((acc, cur) => acc + cur.price, 0);
+  const percentage = totalPrice / lottoPrice;
+
+  const item = getItems();
+
+  const getCategory = (category?: string): string => {
+    switch (category) {
+      case 'developer':
+        return '개발자';
+      case 'real-estate':
+        return '부동산';
+      case 'beauty':
+        return '뷰티/미용';
+      case 'car':
+        return '자동차';
+      case 'shopping':
+        return '쇼핑';
+      case 'travel':
+        return '여행/숙박';
+    }
+    return '';
+  };
 
   const handleCapture = async () => {
     if (captureRef.current) {
       try {
         const canvas = await html2canvas(captureRef.current, { useCORS: true });
-        const imgData = canvas.toDataURL('image/png', 1);
-
         const link = document.createElement('a');
-        link.href = imgData;
+        link.href = canvas.toDataURL('image/png', 1);
         link.download = '로또1등소비계획보고서.png';
         link.click();
-      } catch (error) {
-        console.error('캡처 실패:', error);
+      } catch {
+        throw new Error('이미지 다운로드에 실패했습니다.');
       }
     }
   };
-  //
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      console.log('클립 보드에 복사되었습니다.');
+      alert('URL이 복사되었습니다.');
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <main className='bg-black pb-[140px] text-white'>
-      {/* 헤더? 탑? */}
+      {/* 헤더 */}
       <div className='px-[40px] pt-[36px]'>
-        <div className='mb-[24px] flex items-center gap-2'>
+        <Link href='/plan' className='mb-[24px] flex items-center gap-2'>
           <Image src={arrowLeftIcon} alt='뒤로가기 아이콘' />
           <p>뒤로가기</p>
-        </div>
+        </Link>
       </div>
 
       <div ref={captureRef} className='bg-black'>
-        <div className='font mb-[24px] px-[40px] text-[32px] font-bold'>
-          내 로또1등 소비계획 보고서
-        </div>
+        <div className='mb-[24px] px-[40px] text-[32px] font-bold'>내 로또1등 소비계획 보고서</div>
         {/* 아이템 리스트 */}
-        <ul className='bg-[#383838] px-[40px]'>
+        <div className='bg-[#383838] px-[40px] py-[0px]'>
           {listItem.map((item, index) => {
             const itemPercentage = Math.max((item.price / lottoPrice) * 100, 0.1).toFixed(1);
 
             return (
-              <li
-                key={item.title + index}
+              <div
+                key={item.name + index}
                 className='border-b pb-[24px] pt-[24px] last:border-none'
               >
                 <div className='mb-[8px] inline-block rounded-full bg-[#222] px-[16px] py-[8px] text-white'>
                   <Image
                     src={computerIcon}
-                    alt={item.title}
+                    alt={item.name}
                     className='w-[16px]" mr-1 inline-block h-auto'
                   />
-                  <span className='text-[16px] leading-normal text-white'>{item.category}</span>
+                  <span className='text-[16px] leading-normal text-white'>
+                    {getCategory(item.category)}
+                  </span>
                 </div>
                 <div className='flex items-center gap-4 text-white'>
-                  <p className='flex-1 text-[20px] font-bold'>{item.title}</p>
+                  <p className='flex-1 text-[20px] font-bold'>{item.name}</p>
                   <div className='flex items-center gap-[26px] text-[20px]'>
                     <p>{item.price.toLocaleString()} 원</p>
                     <p className='min-w-[40px]'>{itemPercentage}%</p>
                   </div>
                 </div>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
 
         {/** 총액 / 퍼센트 */}
         <div className='px-[40px] py-[24px]'>
@@ -140,10 +159,13 @@ const ReportPage = () => {
         {/* 차트 */}
         <ReportChart listItem={listItem} />
 
-        {/* AI 한줄평 */}
+        {/* 한줄평 */}
         <div className='flex flex-col gap-[20px] bg-[#383838] px-[40px] py-[24px]'>
-          <div className='text-[24px]'>AI 한줄평</div>
-          <div>좋은 계획입니다 ! </div>
+          <div className='text-[24px]'>한줄평</div>
+          <div>
+            계획대로라면 로또 금액 대비 <span className='font-bold'>{percentage.toFixed(5)}</span>
+            %를 소비할 것입니다!
+          </div>
         </div>
       </div>
 
@@ -155,9 +177,12 @@ const ReportPage = () => {
         >
           이미지 저장하기
         </button>
-        <Link href={''} className='rounded-[20px] border-[1px] border-[#FF7C78] px-[8px] py-[24px]'>
+        <button
+          onClick={handleCopy}
+          className='rounded-[20px] border-[1px] border-[#FF7C78] px-[8px] py-[24px]'
+        >
           URL 복사하기
-        </Link>
+        </button>
       </div>
     </main>
   );
