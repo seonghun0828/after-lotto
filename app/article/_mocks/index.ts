@@ -7,7 +7,7 @@ export const ARTICLES = [
     image:
       'https://images.unsplash.com/photo-1518688248740-7c31f1a945c4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     category: '행동강령',
-    content: [
+    contents: [
       {
         heading: '제0항. 아무에게도 말하지 않기',
         body: '당첨 사실을 알리는 순간 주변의 반응은 걷잡을 수 없게 됩니다. 가족, 친구, 심지어 모르는 사람들까지 갑자기 돈과 관련된 부탁이나 기대를 하게 될 수 있습니다. 이로 인해 큰 스트레스를 받을 수 있으니, 먼저 마음을 가라앉히고 철저히 비밀을 유지하세요.',

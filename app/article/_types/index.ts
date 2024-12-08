@@ -5,7 +5,7 @@ export interface ArticleType {
   createdAt: string;
   image: string;
   category: string;
-  content?: ArticleContentType[];
+  contents?: ArticleContentType[];
 }
 
 export interface ArticleContentType {

@@ -1,6 +1,6 @@
 'use client';
 
-import { ARTICLES } from '../_mocks';
+import { ARTICLES } from '../../_mocks';
 import { useParams } from 'next/navigation';
 import ArticleCard from './ArticleCard';
 
