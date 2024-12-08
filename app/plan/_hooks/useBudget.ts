@@ -1,6 +1,6 @@
 import { useItems } from '@/app/_hooks/useItems';
 
-export const useTotalBudget = (firstWinamnt: number) => {
+export const useBudget = (firstWinamnt: number) => {
   const { getItems } = useItems();
 
   const items = getItems();
@@ -9,5 +9,7 @@ export const useTotalBudget = (firstWinamnt: number) => {
 
   const remainingBudget = firstWinamnt - totalBudget;
 
-  return { totalBudget, remainingBudget };
+  const progress = (totalBudget / firstWinamnt) * 100;
+
+  return { totalBudget, remainingBudget, progress };
 };
