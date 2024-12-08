@@ -1,19 +1,23 @@
 'use client';
 import {
+  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  ChartConfig,
 } from '@/components/ui/chart';
-import { Bar, BarChart, Rectangle } from 'recharts';
+import { Bar, BarChart, CartesianGrid, LabelList, Pie, PieChart, XAxis } from 'recharts';
 import { Item } from '../../app/report/page';
 
 interface ReportChartProps {
   listItem: Item[]; //Pick<Item, 'category' | 'price'>[];
 }
 const chartConfig = {
+  price: {
+    label: '가격',
+    color: 'hsl(var(--chart-1))',
+  },
   developer: {
-    label: 'developer',
+    label: 'develop',
     color: 'hsl(var(--chart-1))',
   },
   house: {
@@ -47,69 +51,58 @@ const ReportChart = ({ listItem }: ReportChartProps) => {
       },
       {} as { [key: string]: number },
     ),
-  ).map(([category, price]) => ({ [category]: price, label: category }));
-  console.log(chartData);
+  ).map(([category, price]) => ({
+    category: category,
+    price: price,
+    fill: chartConfig[category as keyof typeof chartConfig]?.color,
+  }));
 
   return (
     <div className='mb-[12px] flex bg-[#383838] p-[20px]'>
       <div className='flex-1'>
         <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
-            {/* <CartesianGrid vertical={false} />
+            <CartesianGrid vertical={false} />
             <XAxis
-              dataKey='month'
+              dataKey='category'
               tickLine={false}
               tickMargin={10}
               axisLine={false}
-              tickFormatter={(value) => value.slice(0, 3)}
-            /> */}
-            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
-            <Bar
-              dataKey='travel'
-              fill='hsl(var(--chart-1))'
-              radius={8}
-              activeBar={({ ...props }) => {
-                return <Rectangle {...props} fillOpacity={0.8} />;
+              tickFormatter={(value) => {
+                if (value === 'developer') return '개발';
+                if (value === 'house') return '부동산';
+                if (value === 'car') return '자동차';
+                if (value === 'shopping') return '쇼핑';
+                if (value === 'beauty') return '뷰티';
+                if (value === 'travel') return '여행';
+                return value;
               }}
             />
+            <ChartTooltip cursor={false} content={<ChartTooltipContent hideLabel />} />
+            <Bar dataKey='price' fill='hsl(var(--chart-1))' radius={8} />
           </BarChart>
         </ChartContainer>
-        {/* <ChartContainer config={itemConfig} className='min-h-[200px]'>
-          <BarChart accessibilityLayer data={barChartData}>
-            <CartesianGrid vertical={false} />
-            <Bar dataKey='developer' fill='hsl(var(--chart-1))' radius={4}>
-              <LabelList position='top' offset={12} className='fill-foreground' fontSize={12} />
-            </Bar>
-            <Bar dataKey='house' fill='hsl(var(--chart-2))' radius={4} />
-            <Bar dataKey='car' fill='hsl(var(--chart-3))' radius={4}>
-              <LabelList position='top' offset={12} className='fill-foreground' fontSize={12} />
-            </Bar>
-            <Bar dataKey='shopping' fill='hsl(var(--chart-4))' radius={4} />
-            <Bar dataKey='beauty' fill='hsl(var(--chart-5))' radius={4} />
-            <Bar dataKey='travel' fill='hsl(var(--chart-6))' radius={4} />
-          </BarChart>
-        </ChartContainer> */}
       </div>
 
-      {/* <div className='w-[50%]'>
+      <div className='w-[36%]'>
         <ChartContainer
-          config={chartConfig2}
+          config={chartConfig}
           className='[&_.recharts-text]:fill-background mx-auto aspect-square max-h-[250px]'
         >
           <PieChart>
-            <ChartTooltip content={<ChartTooltipContent nameKey='visitors' hideLabel />} />
-            <Pie data={chartData2} dataKey='visitors'>
+            <ChartTooltip content={<ChartTooltipContent nameKey='price' hideLabel />} />
+            <Pie data={chartData} dataKey='price'>
               <LabelList
                 dataKey='browser'
                 className='fill-background'
                 stroke='none'
                 fontSize={12}
-                formatter={(value: keyof typeof chartConfig2) => chartConfig2[value]?.label}
+                formatter={(value: keyof typeof chartConfig) => chartConfig[value]?.label}
               />
             </Pie>
           </PieChart>
         </ChartContainer>
-      </div> */}
+      </div>
     </div>
   );
 };

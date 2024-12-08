@@ -2,6 +2,7 @@ import arrowLeftIcon from '@/public/report/icon/chevron-left.svg';
 import computerIcon from '@/public/report/icon/code-computer.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import ReportChart from '../../components/charts/ReportChart';
 
 export interface Item {
   id: number;
@@ -25,7 +26,7 @@ const listItem: Item[] = [
     category: 'house',
     icon: '',
     title: 'Apple 2025 맥북프로 16 (M4)',
-    price: 400000,
+    price: 4000000,
   },
   {
     id: num++,
@@ -115,7 +116,7 @@ const ReportPage = () => {
       </div>
 
       {/* 차트 */}
-      {/* <ReportChart listItem={listItem} /> */}
+      <ReportChart listItem={listItem} />
 
       {/* AI 한줄평 */}
       <div className='flex flex-col gap-[20px] bg-[#383838] px-[40px] py-[24px]'>
