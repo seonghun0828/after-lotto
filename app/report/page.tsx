@@ -46,18 +46,18 @@ const listItem: IItem[] = [
     id: num++,
     category: 'travel',
     name: 'Apple 2025 맥북프로 16 (M4)',
-    price: 50001000,
+    price: 5000100,
   },
 ];
 
 const ReportPage = () => {
   const { lottoData } = useLottoContext();
+  const { getItems } = useItems();
   const captureRef = useRef<HTMLDivElement>(null);
   const lottoPrice = lottoData?.firstAccumamnt ?? 0;
   const totalPrice = listItem.reduce((acc, cur) => acc + cur.price, 0);
   const percentage = totalPrice / lottoPrice;
 
-  const { getItems } = useItems();
   const item = getItems();
 
   const getCategory = (category?: string): string => {
@@ -113,16 +113,17 @@ const ReportPage = () => {
       </div>
 
       <div ref={captureRef} className='bg-black'>
-        <div className='font mb-[24px] px-[40px] text-[32px] font-bold'>
-          내 로또1등 소비계획 보고서
-        </div>
+        <div className='mb-[24px] px-[40px] text-[32px] font-bold'>내 로또1등 소비계획 보고서</div>
         {/* 아이템 리스트 */}
-        <ul className='bg-[#383838] px-[40px]'>
+        <div className='bg-[#383838] px-[40px] py-[0px]'>
           {listItem.map((item, index) => {
             const itemPercentage = Math.max((item.price / lottoPrice) * 100, 0.1).toFixed(1);
 
             return (
-              <li key={item.name + index} className='border-b pb-[24px] pt-[24px] last:border-none'>
+              <div
+                key={item.name + index}
+                className='border-b pb-[24px] pt-[24px] last:border-none'
+              >
                 <div className='mb-[8px] inline-block rounded-full bg-[#222] px-[16px] py-[8px] text-white'>
                   <Image
                     src={computerIcon}
@@ -140,10 +141,10 @@ const ReportPage = () => {
                     <p className='min-w-[40px]'>{itemPercentage}%</p>
                   </div>
                 </div>
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
 
         {/** 총액 / 퍼센트 */}
         <div className='px-[40px] py-[24px]'>
