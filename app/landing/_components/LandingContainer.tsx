@@ -5,6 +5,8 @@ import LandingLogo from './LandingLogo';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+const BUTTON_TEXT = '추첨 시작';
+
 export default function LandingContainer() {
   const [isDrawing, setIsDrawing] = useState(false);
   const router = useRouter();
@@ -41,7 +43,7 @@ export default function LandingContainer() {
           type='button'
           onClick={handleDraw}
         >
-          추첨 시작
+          {BUTTON_TEXT}
         </button>
       </div>
     </>
