@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import {
   Sheet,
@@ -46,9 +48,9 @@ const BottomSheet = () => {
   };
 
   return (
-    <div className='text-center mb-10'>
+    <div className='text-center'>
       <Sheet>
-        <SheetTrigger className='w-[476px] h-[72px] rounded-2xl p-2 bg-gradient-to-r from-main-gradation-start to-main-gradation-end text-black font-bold'>
+        <SheetTrigger className='w-full max-w-[476px] h-[72px] rounded-2xl p-2 my-8 bg-gradient-to-r from-main-gradation-start to-main-gradation-end text-black font-bold'>
           아이템 담기
         </SheetTrigger>
 
@@ -90,7 +92,7 @@ const BottomSheet = () => {
             </SheetHeader>
           ) : (
             <SheetHeader>
-              <SheetTitle className='text-white text-left'>카테고리</SheetTitle>
+              <SheetTitle className='text-white text-left mb-4'>카테고리</SheetTitle>
               <SheetDescription className='text-white'>
                 <span className='grid grid-cols-3 gap-8 justify-items-center'>
                   {CATEGORIES.map((category) => (
