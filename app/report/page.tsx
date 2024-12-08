@@ -70,10 +70,10 @@ const ReportPage = () => {
     if (captureRef.current) {
       try {
         const canvas = await html2canvas(captureRef.current, { useCORS: true });
-        const imgData = canvas.toDataURL('image/png', 1);
 
         const link = document.createElement('a');
-        link.href = imgData;
+
+        link.href = canvas.toDataURL('image/png', 1);
         link.download = '로또1등소비계획보고서.png';
         link.click();
       } catch (error) {
@@ -87,10 +87,10 @@ const ReportPage = () => {
     <main className='bg-black pb-[140px] text-white'>
       {/* 헤더? 탑? */}
       <div className='px-[40px] pt-[36px]'>
-        <div className='mb-[24px] flex items-center gap-2'>
+        <Link href='/plan' className='mb-[24px] flex items-center gap-2'>
           <Image src={arrowLeftIcon} alt='뒤로가기 아이콘' />
           <p>뒤로가기</p>
-        </div>
+        </Link>
       </div>
 
       <div ref={captureRef} className='bg-black'>
