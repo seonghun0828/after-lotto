@@ -14,6 +14,8 @@ import { ICategory } from '../_types/plan.types';
 import { CATEGORIES } from '../_const/category';
 import { useItems } from '@/app/_hooks/useItems';
 import { IItem, ITEMS } from '@/app/const/items.const';
+import { useToast } from '@/app/_hooks/useToast';
+import { Toaster } from '@/app/_components/ui/toaster';
 
 const PLAN_TO_COMMON_TEMP: Record<string, string> = {
   'code-computer': 'developer',
@@ -29,6 +31,7 @@ const BottomSheet = () => {
   const [items, setItems] = useState<IItem[]>([]); //소분류 리스트
 
   const { addItem } = useItems();
+  const { toast } = useToast();
 
   const resetCategory = () => setCategory(undefined);
 
@@ -39,6 +42,12 @@ const BottomSheet = () => {
 
   const handleItemClick = (curItem: IItem) => {
     addItem(curItem);
+
+    toast({
+      className: 'fixed top-2 left-1/2 z-[100] -translate-x-1/2 w-full max-w-md p-4',
+      title: `${curItem.name} 추가!`,
+      duration: 1000,
+    });
   };
 
   const getItemsByCategory = (category: string) => {
@@ -115,6 +124,8 @@ const BottomSheet = () => {
           )}
         </SheetContent>
       </Sheet>
+
+      <Toaster />
     </div>
   );
 };
