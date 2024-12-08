@@ -7,7 +7,7 @@ import { IItem } from './_types/plan.types';
 import { useState } from 'react';
 
 const Plan = () => {
-  const [selectedItems, setSelectedItems] = useState<IItem[]>([]);
+  const [, setSelectedItems] = useState<IItem[]>([]);
 
   return (
     <div className='font-pretendard text-small'>
@@ -17,7 +17,7 @@ const Plan = () => {
         <PriceInfo />
       </div>
 
-      <AddedItemList selectedItems={selectedItems} />
+      <AddedItemList />
 
       <BottomSheet setSelectedItems={setSelectedItems} />
 
