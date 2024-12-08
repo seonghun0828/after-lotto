@@ -5,6 +5,7 @@ import BottomSheet from './_components/BottomSheet';
 import AddedItemList from './_components/AddedItemList';
 import { IItem } from './_types/plan.types';
 import { useState } from 'react';
+import ShareButton from './_components/ShareButton';
 
 const Plan = () => {
   const [, setSelectedItems] = useState<IItem[]>([]);
@@ -12,7 +13,7 @@ const Plan = () => {
   return (
     <div className='font-pretendard text-small'>
       <div className='p-8'>
-        <div className='text-medium text-right'>공유하기</div>
+        <ShareButton />
 
         <PriceInfo />
       </div>
