@@ -19,7 +19,7 @@ const Plan = () => {
 
       <AddedItemList selectedItems={selectedItems} />
 
-      <BottomSheet setSelectedItems={setSelectedItems} />
+      <BottomSheet />
 
       <div>네비게이션</div>
     </div>
