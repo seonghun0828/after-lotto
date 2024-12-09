@@ -29,9 +29,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang='en' className={`${pretendard.variable}`}>
       <body className='flex justify-center text-white'>
-        <LottoProvider initialData={data}>
-          <div className='min-h-screen w-full max-w-[600px] bg-black'>{children}</div>
-        </LottoProvider>
+        <Suspense>
+          <LottoProvider initialData={data}>
+            <div className='min-h-screen w-full max-w-[600px] bg-black'>{children}</div>
+          </LottoProvider>
+        </Suspense>
       </body>
     </html>
   );
