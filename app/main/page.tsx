@@ -39,13 +39,13 @@ export default function MainPage() {
   return (
     <div className='px-[40px] pt-[40px] flex flex-col gap-[40px]'>
       <div className='flex flex-col gap-[24px]'>
-        <div className='py-[16px] px-[24px] bg-[#383838] font-medium text-[32px] rounded-[20px]'>
+        <div className='py-[16px] px-[24px] bg-[#383838] font-medium text-[5vw] rounded-[20px]'>
           <span className='text-[#ff7c78]'>1등</span> 당첨! 축하드립니다 🎉
         </div>
         <div className='flex flex-col gap-[8px]'>
           <h2 className='text-[20px] font-medium'>당첨금액</h2>
           <NumberFlow
-            className='text-[48px] font-normal'
+            className='text-[10vw] font-normal'
             value={amnt}
             suffix='원'
             trend={0}
@@ -56,7 +56,7 @@ export default function MainPage() {
       <div className='flex flex-col gap-[24px]'>
         <div className='flex flex-col gap-[16px]'>
           <h2 className='font-medium text-[20px]'>이번주 당첨 번호</h2>
-          <div className='flex items-center gap-[12px]'>
+          <div className='flex items-center gap-[8px]'>
             {drwNumbers.map((drwNo, i) => (
               <DrawNumber key={i} drwNo={drwNo} />
             ))}
@@ -66,7 +66,7 @@ export default function MainPage() {
         </div>
         <div className='flex flex-col gap-[16px]'>
           <h2 className='font-medium text-[20px]'>내 번호</h2>
-          <div className='flex items-center gap-[12px]'>
+          <div className='flex items-center gap-[8px]'>
             {drwNumbers.map((drwNo, index) => (
               <DrawNumber key={index} drwNo={drwNo} />
             ))}
