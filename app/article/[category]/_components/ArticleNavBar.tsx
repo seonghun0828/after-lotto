@@ -20,7 +20,7 @@ export default function ArticleNavBar() {
       {ARTICLE_CATEGORIES.map(({ category, params }, index) => (
         <Link
           key={params + index}
-          className={`h-[32px] hover:border-b-2 border-white ${categoryId == params && 'border-b-2 border-white'}`}
+          className={`h-[32px] hover:border-b-2 border-white flex-shrink-0 ${categoryId == params && 'border-b-2 border-white'}`}
           href={params}
           type='button'
         >
