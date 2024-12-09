@@ -16,6 +16,8 @@ import { useItems } from '@/app/_hooks/useItems';
 import { IItem, ITEMS } from '@/app/const/items.const';
 import { useToast } from '@/app/_hooks/useToast';
 import { Toaster } from '@/app/_components/ui/toaster';
+import { useBudget } from '../_hooks/useBudget';
+import { useLottoContext } from '@/app/_contexts/LottoProvider';
 
 const PLAN_TO_COMMON_TEMP: Record<string, string> = {
   'code-computer': 'developer',
@@ -32,6 +34,10 @@ const BottomSheet = () => {
 
   const { addItem } = useItems();
   const { toast } = useToast();
+  
+  const { lottoData } = useLottoContext();
+  const firstWinamnt = lottoData?.firstWinamnt ?? 0;
+  const { remainingBudget } = useBudget(firstWinamnt);
 
   const resetCategory = () => setCategory(undefined);
 
@@ -41,6 +47,18 @@ const BottomSheet = () => {
   };
 
   const handleItemClick = (curItem: IItem) => {
+    const isBudgetEnough = remainingBudget >= curItem.price;
+
+    if (!isBudgetEnough) {
+      toast({
+        className: 'fixed top-2 left-1/2 z-[100] -translate-x-1/2 w-full max-w-md p-4',
+        variant: 'destructive',
+        title: '예산이 부족합니다.',
+        duration: 1000,
+      });
+      return;
+    }
+
     addItem(curItem);
 
     toast({

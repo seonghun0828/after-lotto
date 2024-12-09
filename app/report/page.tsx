@@ -31,7 +31,7 @@ const ReportPage = () => {
       case 'real-estate':
         return '부동산';
       case 'beauty':
-        return '뷰티/미용';
+        return '투자/관리';
       case 'car':
         return '자동차';
       case 'shopping':
