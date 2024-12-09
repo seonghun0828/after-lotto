@@ -21,7 +21,7 @@ const ReportPage = () => {
 
   const lottoPrice = lottoData?.firstWinamnt ?? 0;
   const totalPrice = filteredItems.reduce((acc, cur) => acc + cur.price, 0);
-  const percentage = totalPrice / lottoPrice;
+  const percentage = Math.max((totalPrice / lottoPrice) * 100, 0.1).toFixed(1);
 
   const getCategory = (category?: string): string => {
     switch (category) {
@@ -125,7 +125,7 @@ const ReportPage = () => {
         <div className='flex flex-col gap-[20px] bg-[#383838] px-[40px] py-[24px]'>
           <div className='text-[24px]'>한줄평</div>
           <div>
-            계획대로라면 로또 금액 대비 <span className='font-bold'>{percentage.toFixed(5)}</span>
+            계획대로라면 로또 금액의 <span className='font-bold'>{percentage}</span>
             %를 소비할 것입니다!
           </div>
         </div>
