@@ -19,7 +19,7 @@ const ReportPage = () => {
     itemsParam?.split(',').includes(item.id.toString()),
   );
 
-  const lottoPrice = lottoData?.firstAccumamnt ?? 0;
+  const lottoPrice = lottoData?.firstWinamnt ?? 0;
   const totalPrice = filteredItems.reduce((acc, cur) => acc + cur.price, 0);
   const percentage = totalPrice / lottoPrice;
 
