@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
-import './globals.css';
+import localFont from 'next/font/local';
+import { Suspense } from 'react';
 import { getLottoData } from './_apis/get-lotto-data';
 import LottoProvider from './_contexts/LottoProvider';
 import { getCurrentLottoRound } from './_utils/get-current-lotto-round';
-
-import localFont from 'next/font/local';
+import './globals.css';
 
 const pretendard = localFont({
   src: './_fonts/PretendardVariable.woff2',
@@ -15,7 +15,12 @@ const pretendard = localFont({
 
 export const metadata: Metadata = {
   title: 'After Lotto',
-  description: 'Welcome to After Lotto',
+  description: '로또, 그 이후를 위한 나만의 플랜',
+  openGraph: {
+    title: 'After Lotto',
+    description: '로또, 그 이후를 위한 나만의 플랜',
+    images: 'https://after-lotto.vercel.app/opengraph-image.png',
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {

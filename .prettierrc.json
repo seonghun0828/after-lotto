@@ -9,5 +9,6 @@
   "bracketSpacing": true,
   "endOfLine": "lf",
   "arrowParens": "always",
-  "embeddedLanguageFormatting": "auto"
+  "embeddedLanguageFormatting": "auto",
+  "plugins": ["prettier-plugin-tailwindcss"]
 }
