@@ -5,15 +5,14 @@ import { useParams } from 'next/navigation';
 import ArticleCard from './ArticleCard';
 
 export default function ArticleContent() {
-  const { category } = useParams();
+  const { category = '1' } = useParams();
+  const articles = ARTICLES[Number(category) - 1];
 
   return (
     <div className='flex flex-col gap-[20px]'>
-      {category === '1' ? (
-        ARTICLES.map((article) => <ArticleCard key={article.id} article={article} />)
-      ) : (
-        <div>준비중 입니다.</div>
-      )}
+      {articles.map((article) => (
+        <ArticleCard key={article.id} article={article} />
+      ))}
     </div>
   );
 }

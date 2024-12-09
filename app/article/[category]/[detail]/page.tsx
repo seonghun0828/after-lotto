@@ -3,12 +3,13 @@ import { ARTICLES } from '../../_mocks';
 import { formatDateToKorean } from '../../_utils/format-date-to-korean';
 
 interface ArticleDetailPageProps {
-  params: Promise<{ detail: string }>;
+  params: Promise<{ detail: string; category: string }>;
 }
 
 export default async function ArticleDetailPage({ params }: ArticleDetailPageProps) {
-  const { detail } = await params;
-  const { image, title, category, createdAt, contents } = ARTICLES[Number(detail) - 1];
+  const { detail, category: categoryParams } = await params;
+  const { image, title, category, createdAt, contents } =
+    ARTICLES[Number(categoryParams) - 1][Number(detail) - 1];
 
   return (
     <>
