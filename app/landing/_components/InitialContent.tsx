@@ -6,7 +6,7 @@ const LANDING_TEXT = '로또, 그 이후를 위한 나만의 플랜';
 export default function InitialContent() {
   return (
     <>
-      <span className='text-white text-[32px] font-medium'>{LANDING_TEXT}</span>
+      <span className='text-white text-[24px] font-medium'>{LANDING_TEXT}</span>
       <div className='relative aspect-square'>
         <Image src={LottoNumbers} fill alt='lotto numbers image' />
       </div>
