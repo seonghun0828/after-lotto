@@ -5,7 +5,7 @@ import { getLottoData } from './_apis/get-lotto-data';
 import LottoProvider from './_contexts/LottoProvider';
 import { getCurrentLottoRound } from './_utils/get-current-lotto-round';
 import './globals.css';
-import Gnb from './_components/ui/GNB';
+import Gnb from './_components/ui/Gnb';
 
 const pretendard = localFont({
   src: './_fonts/PretendardVariable.woff2',
