@@ -11,7 +11,7 @@ const PriceInfo = () => {
     <>
       <div>
         <div>당첨금액</div>
-        <div className='text-xlarge'>{firstWinamnt.toLocaleString()}원</div>
+        <div className='text-[36px] sm:text-[48px]'>{firstWinamnt.toLocaleString()}원</div>
       </div>
 
       <div className='flex flex-col gap-4 pt-2'>

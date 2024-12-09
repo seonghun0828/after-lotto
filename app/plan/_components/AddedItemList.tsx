@@ -27,10 +27,11 @@ const AddedItemList = () => {
                   {getKoreanName(category)}
                 </span>
               </div>
-              <div className='flex items-center gap-4 text-white'>
-                <p className='flex-1 font-bold'>{name}</p>
-
-                <p>{price.toLocaleString()} 원</p>
+              <div className='flex justify-between itmes-center gap-4 text-white'>
+                <div className='flex flex-col gap-1'>
+                  <p className='flex-1 font-bold'>{name}</p>
+                  <p>{price.toLocaleString()} 원</p>
+                </div>
 
                 <button onClick={() => removeItem({ id, name, category, price })}>
                   <Image src='/images/plan/delete.png' width={24} height={24} alt='trash icon' />
