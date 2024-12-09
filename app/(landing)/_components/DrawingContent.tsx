@@ -19,7 +19,7 @@ export default function DrawingContent() {
         <p>{drwNo}회</p>
         <p>{formatToDotDate(drwNoDate)}</p>
       </div>
-      <div className='relative aspect-square flex justify-center items-center text-white text-[10vw] font-semibold'>
+      <div className='relative aspect-square flex justify-center items-center text-white text-[36px] sm:text-[48px] font-semibold'>
         <NumberFlow value={amnt} suffix='원' trend={0} transformTiming={{ duration: 1500 }} />
       </div>
     </>

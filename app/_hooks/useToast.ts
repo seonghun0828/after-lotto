@@ -20,6 +20,7 @@ export const actionTypes = {
   DISMISS_TOAST: 'DISMISS_TOAST',
   REMOVE_TOAST: 'REMOVE_TOAST',
 } as const;
+('');
 
 let count = 0;
 
