@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import {
   Sheet,
@@ -12,6 +14,8 @@ import { ICategory } from '../_types/plan.types';
 import { CATEGORIES } from '../_const/category';
 import { useItems } from '@/app/_hooks/useItems';
 import { IItem, ITEMS } from '@/app/const/items.const';
+import { useToast } from '@/app/_hooks/useToast';
+import { Toaster } from '@/app/_components/ui/toaster';
 
 const PLAN_TO_COMMON_TEMP: Record<string, string> = {
   'code-computer': 'developer',
@@ -25,19 +29,25 @@ const PLAN_TO_COMMON_TEMP: Record<string, string> = {
 const BottomSheet = () => {
   const [category, setCategory] = useState<ICategory>(); //대분류 리스트
   const [items, setItems] = useState<IItem[]>([]); //소분류 리스트
-  const [isCategoryClick, setIsCategoryClick] = useState(false);
 
   const { addItem } = useItems();
+  const { toast } = useToast();
+
+  const resetCategory = () => setCategory(undefined);
 
   const handleCategoryClick = (curCategory: ICategory) => {
     setCategory(curCategory);
-    setIsCategoryClick(true);
-
     getItemsByCategory(PLAN_TO_COMMON_TEMP[curCategory.value]);
   };
 
   const handleItemClick = (curItem: IItem) => {
     addItem(curItem);
+
+    toast({
+      className: 'fixed top-2 left-1/2 z-[100] -translate-x-1/2 w-full max-w-md p-4',
+      title: `${curItem.name} 추가!`,
+      duration: 1000,
+    });
   };
 
   const getItemsByCategory = (category: string) => {
@@ -46,14 +56,14 @@ const BottomSheet = () => {
   };
 
   return (
-    <div className='text-center mb-10'>
-      <Sheet>
-        <SheetTrigger className='w-[476px] h-[72px] rounded-2xl p-2 bg-gradient-to-r from-main-gradation-start to-main-gradation-end text-black font-bold'>
+    <div className='text-center'>
+      <Sheet onOpenChange={resetCategory}>
+        <SheetTrigger className='w-full max-w-[476px] h-[72px] rounded-2xl p-2 my-8 bg-gradient-to-r from-main-gradation-start to-main-gradation-end text-black font-bold'>
           아이템 담기
         </SheetTrigger>
 
         <SheetContent side='bottom' className='bg-black h-3/5 max-w-[600px] mx-auto'>
-          {isCategoryClick ? (
+          {category ? (
             <SheetHeader>
               <SheetTitle className='flex flex-row align-center text-white gap-2'>
                 <Image
@@ -62,7 +72,7 @@ const BottomSheet = () => {
                   width={28}
                   height={28}
                   alt='arrow-left'
-                  onClick={() => setIsCategoryClick(false)}
+                  onClick={resetCategory}
                 />
                 <Image
                   src={`/images/plan/${category?.value}.png`}
@@ -90,7 +100,7 @@ const BottomSheet = () => {
             </SheetHeader>
           ) : (
             <SheetHeader>
-              <SheetTitle className='text-white text-left'>카테고리</SheetTitle>
+              <SheetTitle className='text-white text-left mb-4'>카테고리</SheetTitle>
               <SheetDescription className='text-white'>
                 <span className='grid grid-cols-3 gap-8 justify-items-center'>
                   {CATEGORIES.map((category) => (
@@ -114,6 +124,8 @@ const BottomSheet = () => {
           )}
         </SheetContent>
       </Sheet>
+
+      <Toaster />
     </div>
   );
 };
