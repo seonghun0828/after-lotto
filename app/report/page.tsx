@@ -1,8 +1,7 @@
 'use client';
-import arrowLeftIcon from '@/public/report/icon/chevron-left.svg';
-import computerIcon from '@/public/report/icon/code-computer.svg';
+import ArrowLeftIcon from '@/public/report/icon/chevron-left.svg';
+import ComputerIcon from '@/public/report/icon/code-computer.svg';
 import html2canvas from 'html2canvas';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useRef } from 'react';
@@ -15,9 +14,9 @@ const ReportPage = () => {
   const { lottoData } = useLottoContext();
   const captureRef = useRef<HTMLDivElement>(null);
   const searchParams = useSearchParams();
-  const itemsParam = searchParams.get('items'); 
+  const itemsParam = searchParams.get('items');
   const filteredItems = getItems().filter((item) =>
-    itemsParam?.split(',').includes(item.id.toString())
+    itemsParam?.split(',').includes(item.id.toString()),
   );
 
   const lottoPrice = lottoData?.firstAccumamnt ?? 0;
@@ -70,8 +69,11 @@ const ReportPage = () => {
     <main className='bg-black pb-[140px] text-white'>
       {/* 헤더 */}
       <div className='px-[40px] pt-[36px]'>
-        <Link href={searchParams ? `/plan?${searchParams.toString()}` : '/plan'} className='mb-[24px] flex items-center gap-2'>
-          <Image src={arrowLeftIcon} alt='뒤로가기 아이콘' />
+        <Link
+          href={searchParams ? `/plan?${searchParams.toString()}` : '/plan'}
+          className='mb-[24px] flex items-center gap-2'
+        >
+          <ArrowLeftIcon />
           <p>뒤로가기</p>
         </Link>
       </div>
@@ -89,21 +91,17 @@ const ReportPage = () => {
                 className='border-b pb-[24px] pt-[24px] last:border-none'
               >
                 <div className='mb-[8px] inline-block rounded-full bg-[#222] px-[16px] py-[8px] text-white'>
-                  <Image
-                    src={computerIcon}
-                    alt={item.name}
-                    className='w-[16px]" mr-1 inline-block h-auto'
-                  />
+                  <ComputerIcon className='w-[16px]" mr-1 inline-block h-auto' />
                   <span className='text-[16px] leading-normal text-white'>
                     {getCategory(item.category)}
                   </span>
                 </div>
                 <div className='flex items-center justify-between gap-4 text-white text-[20px]'>
-                    <div className='flex flex-col gap-[8px]'>
-                        <p className='font-bold'>{item.name}</p>
-                        <p className=''>{item.price.toLocaleString()} 원</p>
-                    </div>
-                    <p className='min-w-[40px]'>{itemPercentage}%</p>
+                  <div className='flex flex-col gap-[8px]'>
+                    <p className='font-bold'>{item.name}</p>
+                    <p className=''>{item.price.toLocaleString()} 원</p>
+                  </div>
+                  <p className='min-w-[40px]'>{itemPercentage}%</p>
                 </div>
               </div>
             );
