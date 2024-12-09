@@ -7,7 +7,7 @@ const AddedItemList = () => {
   const items = getItems();
 
   return (
-    <div className='flex justify-center w-full items-center h-[671px] mt-6 mb-14 bg-gray'>
+    <div className='flex justify-center w-full items-center h-[540px] bg-gray'>
       {items.length ? (
         <ul className='bg-gray w-full px-10 overflow-y-auto h-full [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-track]:bg-gray [&::-webkit-scrollbar-thumb]:bg-light-gray [&::-webkit-scrollbar-thumb]:rounded-full'>
           {items.map(({ id, name, category, price }) => (
