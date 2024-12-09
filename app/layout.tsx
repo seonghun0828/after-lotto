@@ -1,10 +1,10 @@
 import { Metadata } from 'next';
-import './globals.css';
+import localFont from 'next/font/local';
+import { Suspense } from 'react';
 import { getLottoData } from './_apis/get-lotto-data';
 import LottoProvider from './_contexts/LottoProvider';
 import { getCurrentLottoRound } from './_utils/get-current-lotto-round';
-
-import localFont from 'next/font/local';
+import './globals.css';
 
 const pretendard = localFont({
   src: './_fonts/PretendardVariable.woff2',
@@ -29,9 +29,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   return (
     <html lang='en' className={`${pretendard.variable}`}>
       <body className='flex w-screen justify-center text-white'>
-        <LottoProvider initialData={data}>
-          <div className='min-h-screen w-[600px] min-w-[320px] bg-black'>{children}</div>
-        </LottoProvider>
+        <Suspense>
+            <LottoProvider initialData={data}>
+                <div className='min-h-screen w-[600px] min-w-[320px] bg-black'>{children}</div>
+            </LottoProvider>
+        </Suspense>
       </body>
     </html>
   );
