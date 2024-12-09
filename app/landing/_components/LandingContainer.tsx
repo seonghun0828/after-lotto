@@ -22,7 +22,7 @@ export default function LandingContainer() {
 
     await new Promise<void>((resolve) =>
       setTimeout(() => {
-        router.push('/');
+        router.push('/main');
         resolve();
       }, 2500),
     );

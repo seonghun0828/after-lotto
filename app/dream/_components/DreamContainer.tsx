@@ -1,5 +1,6 @@
 'use client';
 
+import { NavigationBar } from '@/components/ui/navigationBar';
 import Spline from '@splinetool/react-spline';
 import { Suspense, useState } from 'react';
 
@@ -38,6 +39,7 @@ export default function DreamContainer() {
           {BUTTON_TEXT}
         </button>
       </div>
+      <NavigationBar/>
     </div>
   );
 }
