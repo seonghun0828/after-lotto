@@ -18,8 +18,6 @@ const Plan = () => {
         <AddedItemList />
 
         <BottomSheet />
-
-        <div>네비게이션</div>
       </div>
     </Suspense>
   );
