@@ -20,6 +20,8 @@ const GNB_ITEMS = [
 export default function Gnb() {
   const pathname = usePathname();
 
+  if (pathname === '/') return null;
+
   return (
     <nav className='fixed bottom-[20px] px-[20px] w-full flex justify-center'>
       <div className='flex items-center bg-white rounded-[100px] p-[12px] max-w-[560px] w-full justify-center gap-[12px]'>

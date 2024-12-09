@@ -32,7 +32,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className='flex justify-center text-white'>
         <Suspense>
           <LottoProvider initialData={data}>
-            <div className='min-h-screen w-full max-w-[600px] bg-black'>{children}</div>
+            <div className='min-h-screen w-full max-w-[600px] bg-black pb-[128px]'>{children}</div>
             <Gnb />
           </LottoProvider>
         </Suspense>

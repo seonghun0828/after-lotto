@@ -37,7 +37,7 @@ export default function MainPage() {
   }, [lottoData]);
 
   return (
-    <div className='p-[40px] flex flex-col gap-[40px]'>
+    <div className='px-[40px] pt-[40px] flex flex-col gap-[40px]'>
       <div className='flex flex-col gap-[24px]'>
         <div className='py-[16px] px-[24px] bg-[#383838] font-medium text-[32px] rounded-[20px]'>
           <span className='text-[#ff7c78]'>1등</span> 당첨! 축하드립니다 🎉
@@ -86,16 +86,22 @@ export default function MainPage() {
       <div className='flex flex-col px-[24px] gap-[28px] items-center'>
         <h2 className='font-medium text-[20px]'>나는 뭘 살 수 있을까?</h2>
         <Link
-          className='w-full h-[72px] font-semibold text-[24px] text-[#222222] rounded-[20px] bg-gradient-to-r from-[#FFAEAC] to-[#FF7C78]'
+          className='w-full h-[72px] font-semibold text-[24px] text-[#222222] rounded-[20px] bg-gradient-to-r from-[#FFAEAC] to-[#FF7C78] flex justify-center items-center'
           href={'/plan'}
         >
           계획 세우러 가기
         </Link>
         <div className='flex items-center w-full h-[72px] gap-[16px]'>
-          <Link className='w-full border-white border-2 rounded-[20px] h-full' href={'/article'}>
+          <Link
+            className='w-full border-white border-2 rounded-[20px] h-full flex justify-center items-center'
+            href={'/article'}
+          >
             당첨 행동강령
           </Link>
-          <Link className='w-full border-white border-2 rounded-[20px] h-full' href={'/article'}>
+          <Link
+            className='w-full border-white border-2 rounded-[20px] h-full flex justify-center items-center'
+            href={'/article'}
+          >
             당첨금 수령방법
           </Link>
         </div>
