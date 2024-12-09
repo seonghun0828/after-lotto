@@ -5,7 +5,7 @@ const ShareButton = () => {
   const { handleShareClick } = useMoveToReport();
 
   return (
-    <div className='flex justify-end items-center gap-2' onClick={handleShareClick}>
+    <div className='flex justify-end items-center gap-2 cursor-pointer' onClick={handleShareClick}>
       <div className='text-medium text-right'>공유하기</div>
 
       <div className='w-10 h-10 rounded-full bg-white flex justify-center items-center'>

@@ -5,7 +5,7 @@ const KOREAN_NAME_MAP = {
   'real-estate': '부동산',
   car: '차',
   shopping: '쇼핑',
-  beauty: '뷰티',
+  beauty: '투자/관리',
   travel: '여행',
 };
 

@@ -74,7 +74,7 @@ const ReportChart = ({ listItem }: ReportChartProps) => {
                 if (value === 'realestate') return '부동산';
                 if (value === 'car') return '자동차';
                 if (value === 'shopping') return '쇼핑';
-                if (value === 'beauty') return '뷰티';
+                if (value === 'beauty') return '투자/관리';
                 if (value === 'travel') return '여행';
                 return value;
               }}

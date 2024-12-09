@@ -29,7 +29,7 @@ const nextConfig: NextConfig = {
     )
     fileLoaderRule.exclude = /\.svg$/i
     return config
-  },
+  }
 };
 
 export default nextConfig;
