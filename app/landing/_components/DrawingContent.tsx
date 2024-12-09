@@ -15,11 +15,11 @@ export default function DrawingContent() {
 
   return (
     <>
-      <div className='flex justify-between text-[32px] font-medium text-white'>
+      <div className='text-white text-[24px] font-medium flex justify-between'>
         <p>{drwNo}회</p>
         <p>{formatToDotDate(drwNoDate)}</p>
       </div>
-      <div className='relative flex aspect-square items-center justify-center text-[64px] font-semibold text-white'>
+      <div className='relative aspect-square flex justify-center items-center text-white text-[48px] font-semibold'>
         <NumberFlow value={amnt} suffix='원' trend={0} transformTiming={{ duration: 1500 }} />
       </div>
     </>

@@ -1,5 +1,6 @@
 'use client';
 
+import { NavigationBar } from '@/components/ui/navigationBar';
 import Spline from '@splinetool/react-spline';
 import { Suspense, useState } from 'react';
 
@@ -21,25 +22,24 @@ export default function DreamContainer() {
   };
 
   return (
-    <>
-      <div className='pt-[84px] flex flex-col gap-[40px]'>
-        <h1 className='text-white text-[32px] font-bold pl-[40px]'>{HEADER_TEXT}</h1>
-        <div className='aspect-[3/4]'>
-          <Suspense fallback={<div className='animate-pulse w-full h-full bg-gray' />}>
-            <Spline scene={dream} />
-          </Suspense>
-        </div>
+    <div className='pt-[84px] flex flex-col gap-[40px]'>
+      <h1 className='text-white text-[32px] font-bold pl-[40px]'>{HEADER_TEXT}</h1>
+      <div className='aspect-[3/4]'>
+        <Suspense fallback={<div className='animate-pulse w-full h-full bg-gray' />}>
+          <Spline scene={dream} />
+        </Suspense>
       </div>
 
-      <div className='max-w-[524px] h-[72px] fixed bottom-[60px] left-0 right-0 mx-auto px-[24px]'>
+      <div className='max-w-[524px] h-[72px] px-[24px] w-full m-auto'>
         <button
-          className=' w-full h-full font-semibold text-[24px] text-[#222222] rounded-[20px] bg-gradient-to-r from-[#FFAEAC] to-[#FF7C78]'
+          className='w-full h-full font-semibold text-[24px] text-[#222222] rounded-[20px] bg-gradient-to-r from-[#FFAEAC] to-[#FF7C78]'
           type='button'
           onClick={handleClick}
         >
           {BUTTON_TEXT}
         </button>
       </div>
-    </>
+      <NavigationBar/>
+    </div>
   );
 }

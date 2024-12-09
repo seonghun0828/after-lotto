@@ -15,7 +15,12 @@ const pretendard = localFont({
 
 export const metadata: Metadata = {
   title: 'After Lotto',
-  description: 'Welcome to After Lotto',
+  description: '로또, 그 이후를 위한 나만의 플랜',
+  openGraph: {
+    title: 'After Lotto',
+    description: '로또, 그 이후를 위한 나만의 플랜',
+    images: 'https://after-lotto.vercel.app/opengraph-image.png',
+  },
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
@@ -23,11 +28,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
 
   return (
     <html lang='en' className={`${pretendard.variable}`}>
-      <body className='flex w-screen justify-center text-white'>
+      <body className='flex justify-center text-white'>
         <Suspense>
-            <LottoProvider initialData={data}>
-                <div className='min-h-screen w-[600px] min-w-[320px] bg-black'>{children}</div>
-            </LottoProvider>
+          <LottoProvider initialData={data}>
+            <div className='min-h-screen w-full max-w-[600px] bg-black'>{children}</div>
+          </LottoProvider>
         </Suspense>
       </body>
     </html>
