@@ -5,6 +5,7 @@ import { getLottoData } from './_apis/get-lotto-data';
 import LottoProvider from './_contexts/LottoProvider';
 import { getCurrentLottoRound } from './_utils/get-current-lotto-round';
 import './globals.css';
+import Gnb from './_components/ui/GNB';
 
 const pretendard = localFont({
   src: './_fonts/PretendardVariable.woff2',
@@ -32,6 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <Suspense>
           <LottoProvider initialData={data}>
             <div className='min-h-screen w-full max-w-[600px] bg-black'>{children}</div>
+            <Gnb />
           </LottoProvider>
         </Suspense>
       </body>
