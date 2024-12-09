@@ -120,11 +120,11 @@ const BottomSheet = () => {
             <SheetHeader>
               <SheetTitle className='text-white text-left mb-4'>카테고리</SheetTitle>
               <SheetDescription className='text-white'>
-                <span className='grid grid-cols-3 gap-8 justify-items-center'>
+                <span className='grid grid-cols-3 gap-6 justify-items-center'>
                   {CATEGORIES.map((category) => (
                     <span
                       key={category.name}
-                      className='flex flex-col items-center gap-2 w-full max-w-36 p-4 cursor-pointer'
+                      className='flex flex-col items-center gap-2 w-full max-w-36 py-4 cursor-pointer'
                       onClick={() => handleCategoryClick(category)}
                     >
                       <Image
