@@ -73,11 +73,11 @@ export default function MainPage() {
           </div>
         </div>
       </div>
-      <div className='p-[40px] bg-[#383838] flex flex-col gap-[48px]'>
+      <div className='p-[20px] sm:p-[40px] bg-[#383838] flex flex-col gap-[48px]'>
         <h2 className='font-medium text-[20px]'>당첨금으로 뭘 할 수 있을까</h2>
         <div className='flex flex-col gap-[24px]'>
           {purchaseOptions.map((option, index) => (
-            <p key={index} className='text-[24px] font-medium'>
+            <p key={index} className='text-[4vw] sm:text-[24px] font-medium'>
               {option}
             </p>
           ))}
@@ -91,7 +91,7 @@ export default function MainPage() {
         >
           계획 세우러 가기
         </Link>
-        <div className='flex items-center w-full h-[72px] gap-[16px]'>
+        <div className='flex items-center w-full h-[72px] gap-[16px] mb-[92px]'>
           <Link
             className='w-full border-white border-2 rounded-[20px] h-full flex justify-center items-center'
             href={'/article'}

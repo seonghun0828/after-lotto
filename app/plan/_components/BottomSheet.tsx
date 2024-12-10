@@ -34,7 +34,7 @@ const BottomSheet = () => {
 
   const { addItem } = useItems();
   const { toast } = useToast();
-  
+
   const { lottoData } = useLottoContext();
   const firstWinamnt = lottoData?.firstWinamnt ?? 0;
   const { remainingBudget } = useBudget(firstWinamnt);
@@ -76,7 +76,7 @@ const BottomSheet = () => {
   return (
     <div className='text-center'>
       <Sheet onOpenChange={resetCategory}>
-        <SheetTrigger className='w-full max-w-[476px] h-[72px] rounded-2xl p-2 my-8 bg-gradient-to-r from-main-gradation-start to-main-gradation-end text-black font-bold'>
+        <SheetTrigger className='w-full max-w-[476px] h-[72px] rounded-2xl p-2 my-8 mb-24 bg-gradient-to-r from-main-gradation-start to-main-gradation-end text-black font-bold'>
           아이템 담기
         </SheetTrigger>
 
@@ -106,11 +106,11 @@ const BottomSheet = () => {
                   {items.map((item) => (
                     <span
                       key={item.id}
-                      className='w-full max-w-[520px] h-[92px] flex justify-between items-center border-b-2 border-light-gray text-small cursor-pointer'
+                      className='w-full max-w-[520px] h-[92px] flex justify-between items-center gap-1 border-b-2 border-light-gray text-[16px] sm:text-small cursor-pointer'
                       onClick={() => handleItemClick(item)}
                     >
-                      <span>{item?.name}</span>
-                      <span>{item?.price.toLocaleString()}원</span>
+                      <span className='text-left'>{item?.name}</span>
+                      <span className='text-right'>{item?.price.toLocaleString()}원</span>
                     </span>
                   ))}
                 </span>
